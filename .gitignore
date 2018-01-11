@@ -1,0 +1,11 @@
+node_modules/
+.vscode/
+environment/variables.js
+package-lock.json
+acceptance/environment/variables.js
+performance/load_results/
+performance/ramp.bat
+performance/run_load_tests.sh
+ui/.project
+ui/.classpath
+ui/.settings/

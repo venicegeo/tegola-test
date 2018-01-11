@@ -1,0 +1,20 @@
+#!/usr/bin/env groovy
+
+node {
+    def nodejs = tool 'NodeJS_6'
+
+    stage('Test') {
+        withEnv(["HOME=${pwd()}", "PATH=${pwd()}/bin:$PATH:${nodejs}/bin"]) {
+            withCredentials([file(credentialsId: "tegola-qa-environment", variable: 'ENVIRONMENT_FILE')]) {
+                checkout scm
+                sh '''
+                    npm cache clean
+                    cd tegola/acceptance
+                    mv $ENVIRONMENT_FILE environment/variables.js
+                    npm install
+                    npm test
+                '''
+            }
+        }
+    }
+}
